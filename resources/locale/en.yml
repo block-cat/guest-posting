@@ -1,0 +1,6 @@
+block-cat-guest-posting:
+  admin:
+    settings:
+      guest_id_label: "User ID"
+      guest_id_text: "This user ID will be used on start discussion for unregistred people! <strong>min ID:</strong> {min}, <strong>max ID:</strong> {max}"
+      guest_id_message: "Introduced value not is in specificated limits!"
