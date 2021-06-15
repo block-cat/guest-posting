@@ -4,3 +4,10 @@ block-cat-guest-posting:
       guest_id_label: "User ID"
       guest_id_text: "This user ID will be used on start discussion for unregistred people! <strong>min ID:</strong> {min}, <strong>max ID:</strong> {max}"
       guest_id_message: "Introduced value not is in specificated limits!"
+  forum:
+    email_posting_modal:
+      title: "Discussion was posted"
+      approval_message: "Your discussion sent for approval. Thank you for contribution!"
+      get_email_text: "You may be able to leave an email address!"
+      email_placeholder: "Your Email"
+      get_email_button: "Send"
