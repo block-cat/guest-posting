@@ -62,6 +62,8 @@ app.initializers.add('block-cat/guest-posting', () => {
       const guest = app.store.getById('users', guestId);
       const guestUsername = guest.username();
 
+      guestData.attributes.guest_email = this.composer.fields.email;
+
       return app
         .request(
           Object.assign(
@@ -81,15 +83,26 @@ app.initializers.add('block-cat/guest-posting', () => {
           this.composer.hide();
           app.discussions.refresh({ deferClear: true });
         }, this.loaded.bind(this))
-        .then(() => {
-          app.modal.show(GetEmailModal);
-        })
         .catch((error) => {
           this.loading = false;
           m.redraw();
           throw error;
       });
-      }
+    }
+  });
+  override(DiscussionComposer.prototype, 'onsubmit', function(original) {
+    if (app.session.user) {
+      original();
+    } else {
+      var email = '';
+      app.modal.show(GetEmailModal, {
+        email: email,
+        onsubmit: email => {
+          this.composer.fields.email = email;
+          original();
+        }
+      })
+    }
   });
 },
 1);

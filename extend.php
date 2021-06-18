@@ -12,6 +12,8 @@
 namespace BlockCat\GuestPosting;
 
 use Flarum\Extend;
+use Flarum\Api\Event\Serializing;
+use Flarum\Discussion\Event\Saving;
 
 return [
     (new Extend\Routes('api'))
@@ -25,4 +27,7 @@ return [
     new Extend\Locales(__DIR__ . '/resources/locale'),
     (new Extend\Settings())
         ->serializeToForum('block-cat.guestId', 'block-cat.guest_id'),
+
+    (new Extend\Event())->listen(Serializing::class, Listener\AddEmailAttributes::class),
+    (new Extend\Event())->listen(Saving::class, Listener\SaveEmailAttributes::class),
 ];
